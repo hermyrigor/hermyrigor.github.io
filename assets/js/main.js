@@ -75,9 +75,58 @@
     });
   }
 
+  /* ---------- Hero: decode effect ---------- */
+  function initHeroDecode() {
+    var nameEl = document.querySelector('[data-decode]');
+    var roleEl = document.getElementById('heroRole');
+    if (!nameEl || !roleEl) return;
+
+    // Visitors who prefer reduced motion keep the plain static text
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+
+    var ROLES = ['web development', 'IT support', 'IT staff roles'];
+    var CHARS = '01<>/{}#%&*+=_-';
+
+    function sleep(ms) {
+      return new Promise(function (resolve) { setTimeout(resolve, ms); });
+    }
+
+    // Scrambles every letter, then reveals them left to right
+    async function decode(el, text, frameMs) {
+      var frames = text.length * 3;
+      for (var f = 0; f <= frames; f++) {
+        var reveal = Math.floor(f / 3);
+        var out = '';
+        for (var i = 0; i < text.length; i++) {
+          var c = text.charAt(i);
+          out += (c === ' ' || i < reveal) ? c : CHARS.charAt(Math.floor(Math.random() * CHARS.length));
+        }
+        el.textContent = out;
+        await sleep(frameMs);
+      }
+      el.textContent = text;
+    }
+
+    async function run() {
+      await decode(nameEl, nameEl.getAttribute('data-decode'), 38);
+      var i = 0;
+      while (true) {
+        while (document.hidden) { await sleep(500); } // pause in background tabs
+        await decode(roleEl, ROLES[i % ROLES.length], 36);
+        await sleep(2200);
+        i++;
+      }
+    }
+
+    // Wait for the fonts so the scramble never shows in the wrong typeface
+    var ready = (document.fonts && document.fonts.ready) ? document.fonts.ready : Promise.resolve();
+    ready.then(run);
+  }
+
   document.addEventListener('DOMContentLoaded', function () {
     initTheme();
     initNavbarScroll();
     initMobileMenu();
+    initHeroDecode();
   });
 })();

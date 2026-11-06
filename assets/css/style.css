@@ -206,3 +206,29 @@ a:hover { color: var(--c-muted); }
 /* TEMPORARY: makes the placeholder sections tall enough to test scrolling.
    Delete this rule when all real sections are built. */
 .stub { min-height: 70vh; }
+
+/* =========================================================
+   HERO
+   ========================================================= */
+.hero {
+  min-height: 100vh;
+  min-height: 100svh;
+  display: flex;
+  align-items: center;
+  padding-top: calc(var(--section-space) + 2rem);
+}
+.hero .container { width: 100%; }
+
+.hero-photo {
+  width: clamp(180px, 62vw, 340px);
+  height: auto;
+  aspect-ratio: 1 / 1;
+  object-fit: cover;
+  border-radius: 50%;
+  border: 2px solid var(--c-text);
+  background: #FFFFFF; /* the photo has a white background */
+}
+
+.hero-title { color: var(--c-muted); margin-bottom: 1.25rem; }
+.open-line { font-size: 1rem; margin-bottom: 1.25rem; min-height: 1.7em; }
+.hero-intro { max-width: 52ch; margin-bottom: 0; }

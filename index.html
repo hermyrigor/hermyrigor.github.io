@@ -70,14 +70,37 @@
 
   <main id="main">
     <!-- ===== HOME (temporary: replaced in Step 3) ===== -->
-    <section id="home" class="section stub">
+        <!-- ================= HOME ================= -->
+    <section id="home" class="section hero">
       <div class="container">
-        <h1 class="font-display display-name">Hermy Rigor</h1>
-        <p class="lead text-muted-c">Aspiring Web Developer</p>
-        <p class="mono text-muted-c">open to web development</p>
-        <div class="d-flex flex-wrap gap-2 my-4">
-          <a href="#main" class="btn btn-emph">Download resume</a>
-          <a href="#contact" class="btn btn-ghost">Contact me</a>
+        <div class="row align-items-center g-5">
+
+          <div class="col-lg-5 order-1 order-lg-2 text-center">
+            <img class="hero-photo"
+                 src="assets/images/profile/hermy-rigor.webp"
+                 alt="Portrait of Hermy Rigor wearing a dark suit and black tie"
+                 width="800" height="800" fetchpriority="high">
+          </div>
+
+          <div class="col-lg-7 order-2 order-lg-1">
+            <h1 class="font-display display-name" aria-label="Hermy Rigor">
+              <span data-decode="Hermy Rigor" aria-hidden="true">Hermy Rigor</span>
+            </h1>
+            <p class="lead hero-title">Aspiring Web Developer</p>
+            <p class="mono open-line">
+              <span class="text-muted-c">open to </span><span id="heroRole" aria-hidden="true">web development</span><span class="visually-hidden">web development, IT support, and IT staff roles</span>
+            </p>
+            <p class="hero-intro text-muted-c">
+              BS Information Technology graduate from Isabela with hands-on experience in IT support tasks, data encoding, and building database-driven web applications.
+            </p>
+            <div class="d-flex flex-wrap gap-2 mt-4">
+              <a href="assets/docs/Hermy_Rigor_Resume.pdf" class="btn btn-emph" download>
+                <i class="bi bi-download me-2" aria-hidden="true"></i>Download resume
+              </a>
+              <a href="#contact" class="btn btn-ghost">Contact me</a>
+            </div>
+          </div>
+
         </div>
       </div>
     </section>
