@@ -233,3 +233,58 @@ a:hover { color: var(--c-muted); }
 .hero-title { color: var(--c-muted); margin-bottom: 1.25rem; }
 .open-line { font-size: 1rem; margin-bottom: 1.25rem; min-height: 1.7em; }
 .hero-intro { max-width: 52ch; margin-bottom: 0; }
+
+
+/* =========================================================
+   SECTION HEADERS (reused by every section)
+   ========================================================= */
+.section-head { margin-bottom: 2.5rem; }
+.section-label {
+  display: block;
+  font-size: 0.85rem;
+  color: var(--c-muted);
+  margin-bottom: 0.5rem;
+}
+.section-title {
+  font-size: clamp(1.9rem, 5vw, 2.8rem);
+  line-height: 1.15;
+  margin: 0;
+}
+.section-alt {
+  background: var(--c-surface);
+  border-block: 1px solid var(--c-border);
+}
+
+/* =========================================================
+   ABOUT
+   ========================================================= */
+.about-text p { max-width: 62ch; margin-bottom: 1.25rem; }
+.plain-list,
+.skill-list { list-style: none; padding: 0; margin: 0; }
+.plain-list li { padding: 0.6rem 0; border-top: 1px solid var(--c-border); }
+.plain-list li:first-child { border-top: 0; padding-top: 0; }
+.plain-list li:last-child { padding-bottom: 0; }
+
+/* =========================================================
+   SKILLS
+   ========================================================= */
+.skill-list li {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 1rem;
+  padding: 0.7rem 0;
+  border-top: 1px solid var(--c-border);
+}
+.skill-list li:first-child { border-top: 0; padding-top: 0; }
+.skill-list li:last-child { padding-bottom: 0; }
+.level {
+  flex-shrink: 0;
+  font-size: 0.75rem;
+  line-height: 1;
+  padding: 0.4rem 0.65rem;
+  border: 1px solid var(--c-muted);
+  border-radius: 999px;
+  color: var(--c-muted);
+  white-space: nowrap;
+}
