@@ -125,3 +125,84 @@ a:hover { color: var(--c-muted); }
   html { scroll-behavior: auto; }
   *, *::before, *::after { transition: none !important; animation: none !important; }
 }
+
+
+/* =========================================================
+   NAVBAR
+   ========================================================= */
+.site-nav {
+  border-bottom: 1px solid transparent;
+  padding-block: 0.6rem;
+  transition: border-color 0.2s;
+}
+/* The blurred background lives on its own layer so it doesn't trap the mobile menu */
+.site-nav::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  background: var(--c-bg);
+  background: color-mix(in srgb, var(--c-bg) 88%, transparent);
+  -webkit-backdrop-filter: blur(10px);
+  backdrop-filter: blur(10px);
+}
+.site-nav.scrolled { border-bottom-color: var(--c-border); }
+
+.site-nav .logo {
+  font-family: var(--font-mono);
+  font-size: 0.95rem;
+  color: var(--c-text);
+}
+.site-nav .logo:hover { color: var(--c-muted); }
+
+.site-nav .navbar-nav .nav-link {
+  color: var(--c-muted);
+  font-size: 0.95rem;
+  padding: 0.5rem 0.75rem;
+  transition: color 0.2s;
+}
+.site-nav .navbar-nav .nav-link:hover,
+.site-nav .navbar-nav .nav-link.active { color: var(--c-text); }
+.site-nav .navbar-nav .nav-link.active {
+  text-decoration: underline;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 0.55em;
+}
+
+/* Hamburger button */
+.nav-burger {
+  width: 2.5rem;
+  height: 2.5rem;
+  padding: 0;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--c-text);
+  border: 1px solid var(--c-border);
+  border-radius: 0.5rem;
+  font-size: 1.5rem;
+}
+.nav-burger:focus { box-shadow: none; }
+
+/* Slide-in menu (phones and tablets) */
+.offcanvas {
+  --bs-offcanvas-bg: var(--c-surface);
+  --bs-offcanvas-color: var(--c-text);
+  --bs-offcanvas-border-color: var(--c-border);
+}
+@media (max-width: 991.98px) {
+  .offcanvas .nav-link {
+    font-size: 1.1rem;
+    padding: 0.85rem 0;
+    border-bottom: 1px solid var(--c-border);
+  }
+  .site-nav .offcanvas .navbar-nav .nav-link { color: var(--c-text); }
+  .site-nav .navbar-nav .nav-link.active {
+    text-decoration: none;
+    font-weight: 500;
+  }
+}
+
+/* TEMPORARY: makes the placeholder sections tall enough to test scrolling.
+   Delete this rule when all real sections are built. */
+.stub { min-height: 70vh; }
