@@ -217,6 +217,7 @@ a:hover { color: var(--c-muted); }
   align-items: center;
   padding-top: calc(var(--section-space) + 2rem);
 }
+
 .hero .container { width: 100%; }
 
 .hero-photo {
@@ -225,10 +226,10 @@ a:hover { color: var(--c-muted); }
   aspect-ratio: 1 / 1;
   object-fit: cover;
   border-radius: 50%;
-  border: 2px solid var(--c-text);
   background: #FFFFFF; /* the photo has a white background */
+  outline: 2px solid var(--c-muted);
+  outline-offset: 10px;
 }
-
 .hero-title { color: var(--c-muted); margin-bottom: 1.25rem; }
 .open-line { font-size: 1rem; margin-bottom: 1.25rem; min-height: 1.7em; }
 .hero-intro { max-width: 52ch; margin-bottom: 0; }
