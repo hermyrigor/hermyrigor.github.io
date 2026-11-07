@@ -123,10 +123,74 @@
     ready.then(run);
   }
 
+    /* ---------- Contact form: validation (sending is connected in Phase 6) ---------- */
+  function initContactForm() {
+    var form = document.getElementById('contactForm');
+    if (!form) return;
+
+    var status = document.getElementById('cfStatus');
+    var rules = {
+      cfName: function (v) {
+        return v.length >= 2 && v.length <= 80 ? '' : 'Please enter your name (2 to 80 characters).';
+      },
+      cfEmail: function (v) {
+        return /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(v) && v.length <= 254 ? '' : 'Please enter a valid email address.';
+      },
+      cfSubject: function (v) {
+        return v.length >= 3 && v.length <= 120 ? '' : 'Please enter a subject (3 to 120 characters).';
+      },
+      cfMessage: function (v) {
+        return v.length >= 10 && v.length <= 2000 ? '' : 'Please write a message (10 to 2000 characters).';
+      }
+    };
+
+    function check(id) {
+      var input = document.getElementById(id);
+      var err = document.getElementById(id + 'Err');
+      var msg = rules[id](input.value.trim());
+      if (msg) {
+        err.textContent = msg; // textContent, never innerHTML
+        err.hidden = false;
+        input.setAttribute('aria-invalid', 'true');
+      } else {
+        err.textContent = '';
+        err.hidden = true;
+        input.removeAttribute('aria-invalid');
+      }
+      return !msg;
+    }
+
+    Object.keys(rules).forEach(function (id) {
+      var input = document.getElementById(id);
+      input.addEventListener('blur', function () {
+        if (input.value.trim() !== '') check(id);
+      });
+      input.addEventListener('input', function () {
+        if (input.getAttribute('aria-invalid')) check(id);
+      });
+    });
+
+    form.addEventListener('submit', function (e) {
+      e.preventDefault();
+      var firstBad = null;
+      Object.keys(rules).forEach(function (id) {
+        if (!check(id) && !firstBad) firstBad = document.getElementById(id);
+      });
+      if (firstBad) {
+        status.textContent = '';
+        firstBad.focus();
+        return;
+      }
+      // TEMPORARY: replaced in Phase 6 when the form service is connected
+      status.textContent = 'Looks good. Sending will be connected in the next phase.';
+    });
+  }
+
   document.addEventListener('DOMContentLoaded', function () {
     initTheme();
     initNavbarScroll();
     initMobileMenu();
     initHeroDecode();
+    initContactForm();
   });
 })();

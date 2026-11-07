@@ -203,10 +203,6 @@ a:hover { color: var(--c-muted); }
   }
 }
 
-/* TEMPORARY: makes the placeholder sections tall enough to test scrolling.
-   Delete this rule when all real sections are built. */
-.stub { min-height: 70vh; }
-
 /* =========================================================
    HERO
    ========================================================= */
@@ -375,3 +371,58 @@ a:hover { color: var(--c-muted); }
   font-size: 0.9rem;
   color: var(--c-muted);
 }
+
+/* =========================================================
+   TRAINING
+   ========================================================= */
+.training-icon { display: block; font-size: 1.6rem; margin-bottom: 1rem; }
+.training-card .level { display: inline-block; margin-top: 1.25rem; }
+
+/* =========================================================
+   CONTACT
+   ========================================================= */
+.contact-card:hover { transform: none; }
+.contact-intro { max-width: 46ch; margin-bottom: 2rem; }
+
+.contact-list { list-style: none; padding: 0; margin: 0; }
+.contact-list li {
+  display: flex;
+  gap: 1rem;
+  align-items: flex-start;
+  padding: 1rem 0;
+  border-top: 1px solid var(--c-border);
+}
+.contact-list li:first-child { border-top: 0; padding-top: 0; }
+.contact-list .bi { font-size: 1.25rem; line-height: 1.4; }
+.contact-list > li > div { min-width: 0; }
+.contact-list a { overflow-wrap: anywhere; }
+.contact-label { display: block; font-size: 0.75rem; color: var(--c-muted); }
+
+/* Form */
+.field { margin-bottom: 1.25rem; }
+.field label { display: block; font-size: 0.9rem; margin-bottom: 0.4rem; }
+.field input,
+.field textarea {
+  width: 100%;
+  background: var(--c-bg);
+  color: var(--c-text);
+  border: 1px solid var(--c-border);
+  border-radius: 0.5rem;
+  padding: 0.65rem 0.85rem;
+  font: inherit;
+  transition: border-color 0.2s;
+}
+.field textarea { min-height: 9rem; resize: vertical; }
+.field input:hover,
+.field textarea:hover { border-color: var(--c-muted); }
+.field input:focus,
+.field textarea:focus { border-color: var(--c-text); }
+.field [aria-invalid="true"] { border-color: var(--c-text); box-shadow: 0 0 0 1px var(--c-text); }
+
+.field-error { margin: 0.4rem 0 0; font-size: 0.85rem; }
+.field-error::before { content: "Error: "; font-weight: 500; }
+
+.form-status { margin: 1rem 0 0; font-size: 0.9rem; color: var(--c-muted); min-height: 1.4em; }
+
+/* Spam trap: hidden from sight but not display:none, so simple bots still fill it */
+.hp { position: absolute; left: -9999px; width: 1px; height: 1px; overflow: hidden; }
