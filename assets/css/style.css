@@ -346,3 +346,32 @@ a:hover { color: var(--c-muted); }
   border-radius: 999px;
   color: var(--c-muted);
 }
+
+
+/* =========================================================
+   PROJECTS
+   ========================================================= */
+.project-card:hover { transform: none; }
+
+.project-overview { max-width: 75ch; margin-bottom: 1.75rem; }
+
+.project-block { margin-bottom: 1.75rem; }
+.project-block:last-child { margin-bottom: 0; }
+.project-block .exp-list { margin-bottom: 0; }
+
+.project-h {
+  font-size: 0.8rem;
+  font-weight: 400;
+  color: var(--c-muted);
+  margin-bottom: 0.6rem;
+}
+
+.project-card .tag-list { margin-top: 0.5rem; }
+
+.project-note {
+  margin: 1.5rem 0 0;
+  padding-top: 1.25rem;
+  border-top: 1px solid var(--c-border);
+  font-size: 0.9rem;
+  color: var(--c-muted);
+}
