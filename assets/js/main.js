@@ -131,6 +131,53 @@
     ready.then(run);
   }
 
+    /* ---------- Project gallery: screenshot viewer ---------- */
+  function initGallery() {
+    var modalEl = document.getElementById('galleryModal');
+    var buttons = document.querySelectorAll('[data-gallery-index]');
+    if (!modalEl || !buttons.length || !window.bootstrap) return;
+
+    var modal = bootstrap.Modal.getOrCreateInstance(modalEl);
+    var imgEl = document.getElementById('galleryImg');
+    var capEl = document.getElementById('galleryCaption');
+    var countEl = document.getElementById('galleryCount');
+
+    // Read the thumbnails so the images and captions are written only once, in the HTML
+    var items = Array.prototype.map.call(buttons, function (btn) {
+      var img = btn.querySelector('img');
+      return {
+        src: img.getAttribute('src'),
+        alt: img.getAttribute('alt'),
+        caption: btn.querySelector('.shot-cap').textContent
+      };
+    });
+
+    var index = 0;
+
+    function show(i) {
+      index = (i + items.length) % items.length; // wraps around at both ends
+      imgEl.src = items[index].src;
+      imgEl.alt = items[index].alt;
+      capEl.textContent = items[index].caption;
+      countEl.textContent = (index + 1) + ' / ' + items.length;
+    }
+
+    buttons.forEach(function (btn, i) {
+      btn.addEventListener('click', function () {
+        show(i);
+        modal.show();
+      });
+    });
+
+    document.getElementById('galleryPrev').addEventListener('click', function () { show(index - 1); });
+    document.getElementById('galleryNext').addEventListener('click', function () { show(index + 1); });
+
+    modalEl.addEventListener('keydown', function (e) {
+      if (e.key === 'ArrowLeft') { show(index - 1); }
+      else if (e.key === 'ArrowRight') { show(index + 1); }
+    });
+  }
+
     /* ---------- Scroll reveal: each block fades up once ---------- */
   function initReveal() {
     if (!('IntersectionObserver' in window)) return;
@@ -250,5 +297,6 @@
     initContactForm();
     initCopyEmail();
     initReveal();
+    initGallery();
   });
 })();

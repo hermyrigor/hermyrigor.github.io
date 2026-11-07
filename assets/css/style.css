@@ -476,3 +476,71 @@ a:hover { color: var(--c-muted); }
   transition: opacity 0.4s ease, transform 0.4s ease;
 }
 .will-reveal.is-visible { opacity: 1; transform: none; }
+
+
+/* =========================================================
+   PROJECT GALLERY
+   ========================================================= */
+.gallery {
+  list-style: none;
+  padding: 0;
+  margin: 0 0 2rem;
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 0.75rem;
+}
+@media (min-width: 768px) {
+  .gallery { grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 1rem; }
+}
+
+.shot {
+  display: block;
+  width: 100%;
+  padding: 0;
+  margin: 0;
+  background: var(--c-surface);
+  color: var(--c-text);
+  border: 1px solid var(--c-border);
+  border-radius: 0.6rem;
+  overflow: hidden;
+  text-align: left;
+  cursor: zoom-in;
+  transition: border-color 0.2s;
+}
+.shot:hover { border-color: var(--c-muted); }
+.shot img {
+  display: block;
+  width: 100%;
+  height: auto;
+  aspect-ratio: 16 / 9;
+  object-fit: cover;
+  object-position: top;
+}
+.shot-cap {
+  display: block;
+  padding: 0.6rem 0.75rem;
+  font-size: 0.85rem;
+  color: var(--c-muted);
+  border-top: 1px solid var(--c-border);
+}
+
+/* Viewer */
+.modal {
+  --bs-modal-bg: var(--c-surface);
+  --bs-modal-color: var(--c-text);
+  --bs-modal-border-color: var(--c-border);
+  --bs-modal-header-border-color: var(--c-border);
+  --bs-modal-footer-border-color: var(--c-border);
+}
+#galleryImg {
+  display: block;
+  width: 100%;
+  height: auto;
+  max-height: 68vh;
+  object-fit: contain;
+  border: 1px solid var(--c-border);
+  border-radius: 0.5rem;
+  background: var(--c-bg);
+}
+.gallery-caption { margin-top: 0.9rem; color: var(--c-muted); }
+.modal-footer { justify-content: space-between; }
