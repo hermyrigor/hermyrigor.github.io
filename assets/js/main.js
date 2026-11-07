@@ -123,6 +123,30 @@
     ready.then(run);
   }
 
+    /* ---------- Contact: copy email address ---------- */
+  function initCopyEmail() {
+    var btn = document.getElementById('copyEmail');
+    var status = document.getElementById('copyStatus');
+    if (!btn || !status) return;
+
+    function say(msg) {
+      status.textContent = msg;
+      setTimeout(function () { status.textContent = ''; }, 2500);
+    }
+
+    btn.addEventListener('click', function () {
+      var email = btn.getAttribute('data-email');
+      if (navigator.clipboard && navigator.clipboard.writeText) {
+        navigator.clipboard.writeText(email).then(
+          function () { say('Copied!'); },
+          function () { say('Copy failed. Please select the address above.'); }
+        );
+      } else {
+        say('Copy is not supported here. Please select the address above.');
+      }
+    });
+  }
+
     /* ---------- Contact form: validation (sending is connected in Phase 6) ---------- */
   function initContactForm() {
     var form = document.getElementById('contactForm');
@@ -192,5 +216,6 @@
     initMobileMenu();
     initHeroDecode();
     initContactForm();
+    initCopyEmail();
   });
 })();

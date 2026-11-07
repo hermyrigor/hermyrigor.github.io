@@ -426,3 +426,27 @@ a:hover { color: var(--c-muted); }
 
 /* Spam trap: hidden from sight but not display:none, so simple bots still fill it */
 .hp { position: absolute; left: -9999px; width: 1px; height: 1px; overflow: hidden; }
+
+/* Email alternatives */
+.email-actions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.5rem;
+  margin-top: 0.6rem;
+}
+.mini-btn {
+  font: inherit;
+  font-size: 0.8rem;
+  line-height: 1;
+  padding: 0.45rem 0.75rem;
+  border: 1px solid var(--c-border);
+  border-radius: 999px;
+  background: transparent;
+  color: var(--c-text);
+  text-decoration: none;
+  cursor: pointer;
+  transition: border-color 0.2s;
+}
+.mini-btn:hover { border-color: var(--c-muted); color: var(--c-text); }
+.copy-status { font-size: 0.8rem; color: var(--c-muted); }
