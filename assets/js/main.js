@@ -59,6 +59,14 @@
     var menuEl = document.getElementById('navMenu');
     if (!menuEl || !window.bootstrap) return;
     var menu = bootstrap.Offcanvas.getOrCreateInstance(menuEl);
+    
+    // Name the menu only while it is open (Bootstrap gives it role="dialog" at that time)
+    menuEl.addEventListener('show.bs.offcanvas', function () {
+      menuEl.setAttribute('aria-labelledby', 'navMenuLabel');
+    });
+    menuEl.addEventListener('hidden.bs.offcanvas', function () {
+      menuEl.removeAttribute('aria-labelledby');
+    });
 
     menuEl.querySelectorAll('a.nav-link').forEach(function (link) {
       link.addEventListener('click', function (e) {
