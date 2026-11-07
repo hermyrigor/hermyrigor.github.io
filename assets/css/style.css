@@ -450,3 +450,29 @@ a:hover { color: var(--c-muted); }
 }
 .mini-btn:hover { border-color: var(--c-muted); color: var(--c-text); }
 .copy-status { font-size: 0.8rem; color: var(--c-muted); }
+
+
+/* =========================================================
+   FOOTER
+   ========================================================= */
+.site-footer { padding-block: 2rem; font-size: 0.9rem; }
+.footer-inner {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: center;
+  gap: 0.75rem 1.5rem;
+}
+.footer-links { display: flex; gap: 1.25rem; }
+.footer-links a { color: var(--c-muted); }
+.footer-links a:hover { color: var(--c-text); }
+
+/* =========================================================
+   SCROLL FADE-IN
+   ========================================================= */
+.will-reveal {
+  opacity: 0;
+  transform: translateY(16px);
+  transition: opacity 0.4s ease, transform 0.4s ease;
+}
+.will-reveal.is-visible { opacity: 1; transform: none; }

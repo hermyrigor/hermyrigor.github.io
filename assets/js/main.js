@@ -123,6 +123,30 @@
     ready.then(run);
   }
 
+    /* ---------- Scroll reveal: each block fades up once ---------- */
+  function initReveal() {
+    if (!('IntersectionObserver' in window)) return;
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+
+    var items = document.querySelectorAll('.section-head, .about-text, .card-c, .contact-list');
+
+    var io = new IntersectionObserver(function (entries) {
+      entries.forEach(function (entry) {
+        if (!entry.isIntersecting) return;
+        var el = entry.target;
+        io.unobserve(el);
+        el.classList.add('is-visible');
+        // Remove the helper classes afterwards so normal hover effects work again
+        setTimeout(function () { el.classList.remove('will-reveal', 'is-visible'); }, 700);
+      });
+    }, { threshold: 0.12 });
+
+    items.forEach(function (el) {
+      el.classList.add('will-reveal');
+      io.observe(el);
+    });
+  }
+
     /* ---------- Contact: copy email address ---------- */
   function initCopyEmail() {
     var btn = document.getElementById('copyEmail');
@@ -217,5 +241,6 @@
     initHeroDecode();
     initContactForm();
     initCopyEmail();
+    initReveal();
   });
 })();
