@@ -549,3 +549,7 @@ a:hover { color: var(--c-muted); }
 /* Contact form: sending state and privacy note */
 .btn-emph:disabled { opacity: 0.6; cursor: not-allowed; }
 .form-note { margin: 0.5rem 0 0; font-size: 0.8rem; color: var(--c-muted); }
+
+
+/* 404 page */
+.notfound { min-height: 100vh; display: flex; align-items: center; }
