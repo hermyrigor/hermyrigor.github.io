@@ -226,12 +226,14 @@
     });
   }
 
-    /* ---------- Contact form: validation (sending is connected in Phase 6) ---------- */
+    /* ---------- Contact form: validation and sending ---------- */
   function initContactForm() {
     var form = document.getElementById('contactForm');
     if (!form) return;
 
     var status = document.getElementById('cfStatus');
+    var button = form.querySelector('button[type="submit"]');
+
     var rules = {
       cfName: function (v) {
         return v.length >= 2 && v.length <= 80 ? '' : 'Please enter your name (2 to 80 characters).';
@@ -273,19 +275,58 @@
       });
     });
 
-    form.addEventListener('submit', function (e) {
+    form.addEventListener('submit', async function (e) {
       e.preventDefault();
+      status.textContent = '';
+
       var firstBad = null;
       Object.keys(rules).forEach(function (id) {
         if (!check(id) && !firstBad) firstBad = document.getElementById(id);
       });
-      if (firstBad) {
-        status.textContent = '';
-        firstBad.focus();
+      if (firstBad) { firstBad.focus(); return; }
+
+      // Spam trap: a real visitor never fills this field. Pretend it worked and send nothing.
+      var trap = form.querySelector('[name="company_website"]');
+      if (trap && trap.value.trim() !== '') {
+        status.textContent = 'Thanks! Your message has been sent.';
+        form.reset();
         return;
       }
-      // TEMPORARY: replaced in Phase 6 when the form service is connected
-      status.textContent = 'Looks good. Sending will be connected in the next phase.';
+
+      button.disabled = true; // prevents double sends
+      status.textContent = 'Sending…';
+
+      var payload = {
+        access_key: form.elements['access_key'].value,
+        name: document.getElementById('cfName').value.trim(),
+        email: document.getElementById('cfEmail').value.trim(),
+        subject: '[Portfolio] ' + document.getElementById('cfSubject').value.trim(),
+        message: document.getElementById('cfMessage').value.trim()
+      };
+
+      var controller = new AbortController();
+      var timer = setTimeout(function () { controller.abort(); }, 15000);
+
+      try {
+        var res = await fetch('https://api.web3forms.com/submit', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+          body: JSON.stringify(payload),
+          signal: controller.signal
+        });
+        var result = await res.json();
+        if (res.ok && result.success) {
+          status.textContent = 'Thanks! Your message has been sent. I’ll reply to the email address you gave.';
+          form.reset();
+        } else {
+          throw new Error('Rejected by the form service');
+        }
+      } catch (err) {
+        status.textContent = 'Sorry, your message could not be sent. Please try again later, or email me directly at hermyrigor18@gmail.com.';
+      } finally {
+        clearTimeout(timer);
+        button.disabled = false;
+      }
     });
   }
 

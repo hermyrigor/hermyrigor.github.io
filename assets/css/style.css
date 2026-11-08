@@ -544,3 +544,8 @@ a:hover { color: var(--c-muted); }
 }
 .gallery-caption { margin-top: 0.9rem; color: var(--c-muted); }
 .modal-footer { justify-content: space-between; }
+
+
+/* Contact form: sending state and privacy note */
+.btn-emph:disabled { opacity: 0.6; cursor: not-allowed; }
+.form-note { margin: 0.5rem 0 0; font-size: 0.8rem; color: var(--c-muted); }
