@@ -48,10 +48,19 @@
   /* ---------- Navbar: border appears after scrolling ---------- */
   function initNavbarScroll() {
     var nav = document.getElementById('siteNav');
-    if (!nav) return;
-    function update() { nav.classList.toggle('scrolled', window.scrollY > 10); }
-    update();
-    window.addEventListener('scroll', update, { passive: true });
+    var sentinel = document.getElementById('navSentinel');
+    if (!nav || !sentinel) return;
+
+    // Very old browsers: just keep the border visible
+    if (!('IntersectionObserver' in window)) {
+      nav.classList.add('scrolled');
+      return;
+    }
+
+    // The browser tells us when the marker leaves the screen, so we never read the scroll position
+    new IntersectionObserver(function (entries) {
+      nav.classList.toggle('scrolled', !entries[0].isIntersecting);
+    }).observe(sentinel);
   }
 
   /* ---------- Mobile menu: close first, then scroll to the section ---------- */

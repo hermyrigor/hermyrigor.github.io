@@ -553,3 +553,14 @@ a:hover { color: var(--c-muted); }
 
 /* 404 page */
 .notfound { min-height: 100vh; display: flex; align-items: center; }
+
+
+/* Invisible marker at the top of the page. The navbar border appears once it scrolls out of view. */
+#navSentinel {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 1px;
+  height: 10px;
+  pointer-events: none;
+}
